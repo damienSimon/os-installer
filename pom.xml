@@ -2,21 +2,34 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+
+	<groupId>dasim.devops</groupId>
+	<artifactId>os-installer</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>os-installer</name>
+	<description>Utilitaire permettant d'installer un poste complet et opérationnel en peu de temps</description>
+	<url>https://github.com/damienSimon/os-installer</url>
+	<scm>
+		<url>scm:git@github.com/damienSimon/os-installer</url>
+	</scm>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>dasim.devops</groupId>
-	<artifactId>os-installer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>os-installer</name>
-	<description>Utilitaire permettant d'installer un poste complet et opérationnel en peu de temps</description>
 
-	<scm>
-		<url>scm:git@github.com/damienSimon/os-installer</url>
-	</scm>
+	<modules>
+		<module>os-installer-application</module>
+		<module>os-installer-clients</module>
+		<module>os-installer-definitions</module>
+		<module>os-installer-exception</module>
+		<module>os-installer-infrastructure</module>
+		<module>os-installer-metier</module>
+		<module>os-installer-server</module>
+	</modules>
 
 	<properties>
 		<java.version>1.8</java.version>
