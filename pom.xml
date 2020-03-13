@@ -23,11 +23,8 @@
 
 	<modules>
 		<module>os-installer-application</module>
-		<module>os-installer-clients</module>
-		<module>os-installer-definitions</module>
-		<module>os-installer-exception</module>
 		<module>os-installer-infrastructure</module>
-		<module>os-installer-metier</module>
+		<module>os-installer-domain</module>
 		<module>os-installer-server</module>
 	</modules>
 

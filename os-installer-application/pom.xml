@@ -16,13 +16,7 @@
 
         <dependency>
             <groupId>dasim.devops</groupId>
-            <artifactId>os-installer-metier</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>dasim.devops</groupId>
-            <artifactId>os-installer-definitions</artifactId>
+            <artifactId>os-installer-domain</artifactId>
             <version>${project.version}</version>
         </dependency>
 

@@ -1,2 +1,2 @@
-# OSInstaller
-utilitaire permettant d'installer un poste complet et opérationnel en peu de temps
+# os-installer
+tool which allow to install a complete and operational operating system in a short time
