@@ -10,13 +10,13 @@ import org.springframework.shell.standard.ShellMethod;
 public class TestCommands {
 
     /**
-     * Test the installation of all your selected applications in a virtual machine. No impact on your operating system.
+     * Test the installation of selected applications from the current template in a virtual machine. No impact on your operating.
      *
      * @return information about process
      */
     @ShellMethod(group = "Tests commands",
-                 value = "Test the installation of all your selected applications in a virtual machine. No impact on your operating " +
-                         "system.")
+                 value = "Test the installation of selected applications from the current template in a virtual machine. No impact on " +
+                         "your operating." + "system.")
     public String test() {
 
         return "Need to verify ? you are on the right place dude !";
