@@ -1,0 +1,7 @@
+package dasim.devops.osinstaller.domain.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class LogService {
+}
