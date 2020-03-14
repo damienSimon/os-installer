@@ -17,9 +17,7 @@ public class TemplateContentCommands {
      *
      * @return information about process
      */
-    @ShellMethod(key = TEMPLATE_CONTENT,
-                 group = "Template content commands",
-                 value = "Get the complete list of applications contained in the template")
+    @ShellMethod(key = "list", group = TEMPLATE_CONTENT, value = "Get the complete list of applications contained in the template")
     public String listApplicationsFromCurrentTemplate() {
 
         return "list of applications contained in the current template : {}";
