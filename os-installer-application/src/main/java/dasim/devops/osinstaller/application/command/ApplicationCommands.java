@@ -4,6 +4,8 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+import static dasim.devops.osinstaller.application.command.constant.CommandsGroupConstant.APPLICATION;
+
 /**
  * Class for the application's shell command
  */
@@ -16,7 +18,7 @@ public class ApplicationCommands {
      * @return information about process
      */
     @ShellMethod(key = "list --a",
-                 group = "Application commands",
+                 group = APPLICATION,
                  value = "Get the complete list of applications autorized to install no matter the template")
     public String list() {
 
@@ -31,7 +33,7 @@ public class ApplicationCommands {
      * @return information about process
      */
     @ShellMethod(key = "add --a",
-                 group = "Application commands",
+                 group = APPLICATION,
                  value = "Add an application to the list of possible application to install and persist it.")
     public String add(
             @ShellOption(value = {"-n", "-name"}, help = "Name of the application to add (don't use space).") String applicationName,
@@ -49,7 +51,7 @@ public class ApplicationCommands {
      * @return information about process
      */
     @ShellMethod(key = "delete --a",
-                 group = "Application commands",
+                 group = APPLICATION,
                  value = "Delete an application to the list of possible application to install and persist it.")
     public String delete(
             @ShellOption(value = {"-n", "-name"}, help = "Name of the application to add (don't use space).") String applicationName,
