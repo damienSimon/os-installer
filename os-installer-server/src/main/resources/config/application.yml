@@ -1,0 +1,10 @@
+server:
+  port: ${environnement.server.port}
+
+spring:
+  application:
+    name: os-installer-server
+  profiles:
+    include: env_project
+  main:
+    banner-mode: 'off'
