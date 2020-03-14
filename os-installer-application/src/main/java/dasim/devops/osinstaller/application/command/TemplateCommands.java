@@ -11,38 +11,81 @@ import org.springframework.shell.standard.ShellOption;
 public class TemplateCommands {
 
     /**
-     * Load a template which contains a list of applications to install on OS
+     * Load a template which contains a list of applications to install on OS. All modifications done before will be lost !
      *
      * @param templateName name of the template
      * @return information about process
      */
-    @ShellMethod(group = "Template commands", value = "load a template which contains a list of application to install")
-    public String load(@ShellOption String templateName) {
+    @ShellMethod(group = "Template commands",
+                 value = "load a template which contains a list of application to install on OS. All modifications done before will be " +
+                         "lost !")
+    public String load(@ShellOption(value = "-n", help = "name of the template") String templateName) {
 
         return "template " + templateName + " loaded !";
     }
 
     /**
-     * Allow to reset the shell with no template loaded
+     * Create a new template with the given name and no applications.
      *
-     * @return information about process
-     */
-    @ShellMethod(group = "Template commands", value = "allow to reset the shell with no template loaded")
-    public String reset() {
-
-        return "no template loaded !";
-    }
-
-    /**
-     * Create a new template with the name given and no applications.
-     *
-     * @param newTemplateName name of the template
+     * @param newTemplateName name of the new template
      * @return information about process
      */
     @ShellMethod(group = "Template commands", value = "Create a new template with the name given and no applications.")
-    public String create(@ShellOption String newTemplateName) {
+    public String create(@ShellOption(value = "-n", help = "name of the new template") String newTemplateName) {
 
         return "template " + newTemplateName + " created !";
+    }
+
+    /**
+     * Delete the template with the given name
+     *
+     * @param templateNameToDelete name of the template to delete
+     * @return information about process
+     */
+    @ShellMethod(key = "delete --t", group = "Template commands", value = "Delete the template with the given name.")
+    public String deleteTemplate(@ShellOption(value = "-n", help = "name of the template to delete") String templateNameToDelete) {
+
+        return "template " + templateNameToDelete + " deleted !";
+    }
+
+    /**
+     * Start to install all the applications listed in the current template on your operating system. No automatic rollback will be possible
+     * !
+     *
+     * @param noConfirmation Launch installation of all applications without asking a confirmation.
+     * @return information about process
+     */
+    @ShellMethod(group = "Template commands",
+                 value = "Start to install all the applications listed in the current template on your operating system. No automatic " +
+                         "rollback will be possible !")
+    public String start(@ShellOption(value = "-y", help = "Launch installation of all applications without asking a confirmation.")
+            boolean noConfirmation) {
+
+        return "Be carefull, no automatic rollback will be possible ! Are you sure to want to install all the applications listed in the " +
+                "current template on your operating system ? ";
+    }
+
+    /**
+     * Get the list of existing templates
+     *
+     * @return information about process
+     */
+    @ShellMethod(key = "list --t", group = "Template commands", value = "Get the list of existing templates")
+    public String listTemplates() {
+
+        return "list of existing templates : xxx";
+    }
+
+    /**
+     * Save the current template with his list of applications
+     *
+     * @param templateName name of the template
+     * @return information about process
+     */
+    @ShellMethod(key = "save", group = "Template commands", value = "Save the current template with his list of applications")
+    public String save(@ShellOption(value = "-n", help = "name of the template") String templateName) {
+
+        return "template " + templateName + " saved !";
     }
 
 }
