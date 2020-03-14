@@ -1,4 +1,4 @@
-package dasim.devops.osinstaller.infrastructure.storage.object;
+package dasim.devops.osinstaller.infrastructure.storage.json;
 
 import dasim.devops.osinstaller.infrastructure.storage.enumeration.OperatingSystemEnum;
 import lombok.Builder;

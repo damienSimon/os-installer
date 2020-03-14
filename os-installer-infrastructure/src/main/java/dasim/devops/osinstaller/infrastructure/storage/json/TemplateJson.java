@@ -1,4 +1,4 @@
-package dasim.devops.osinstaller.infrastructure.storage.object;
+package dasim.devops.osinstaller.infrastructure.storage.json;
 
 import lombok.Builder;
 import lombok.Getter;
