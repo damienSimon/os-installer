@@ -1,41 +1,18 @@
 #!/bin/bash
-# Installation VM Ubuntu 18.04.4 LTS de test dans VirtualBox
 
+# Installation VM Ubuntu 18.04.4 LTS de test dans VirtualBox
 echo -e '\E[32m Configuration de la VM Ubuntu de test dans VirtualBox en cours... \E[0m'
 
-créer repertoire iso et telecharger image iso ubuntu desktop (checker si fichier présent sinon pas dupliquer les 2Go...)
-creer repertoire VMs... (idem verifier si deja présent, si c est le cas demandez confirmation de suppression)
+#créer repertoire iso et telecharger image iso ubuntu desktop (checker si fichier présent sinon pas dupliquer les 2Go...)
+#creer repertoire VMs... (idem verifier si deja présent, si c est le cas demandez confirmation de suppression)
 
-A corriger dans install auto ubuntu dans virtual box :
-- user créé non root
-- A changer => keyboard-configuration/layoutcode us + detectedOSLanguages en-US + language en-US + languagechooser/language-name=English
-- enlever la popup"aidez nous à améliorer ubuntu après reboot"
-- user login session obligatoire (voir pour le virer dans le cas de mes tests) => start-vm=headless suffit ? (possible de reboot la VM et demarrer en GUI après ?)
-- modifier le script post_install pour aller lancer mes scripts sh outils?
-
-
-
-
-
+#A corriger dans install auto ubuntu dans virtual box
+#- enlever la popup "aidez nous à améliorer ubuntu après reboot" (/usr/lib/gnome-initial-setup/gnome-initial-setup --exisiting-user ?)
+#- user login session obligatoire (voir pour le virer dans le cas de mes tests) => start-vm=headless suffit ? (possible de reboot la VM et demarrer en GUI après ?)
+#- modifier le script post_install pour aller lancer mes scripts sh outils?
 
 # Definition des variables pour la VM et l'OS
-NOM_VIRTUAL_MACHINE=test-vm-ubuntu-18-04
-REPERTOIRE_VIRTUAL_BOX=/home/dasim/perso/outils/VirtualBox
-CHEMIN_FICHIER_ISO=${REPERTOIRE_VIRTUAL_BOX}/iso/ubuntu-18.04.4-desktop-amd64.iso
-CHEMIN_FICHIER_VDI=${REPERTOIRE_VIRTUAL_BOX}/VMs/${NOM_VIRTUAL_MACHINE}/${NOM_VIRTUAL_MACHINE}.vdi
-SCRIPT_TEMPLATE=/home/dasim/perso/developpement/os-installer/scripts_bash/UnattendedTemplates_override/ubuntu_preseed_override.cfg
-SCRIPT_TEMPLATE=/usr/lib/virtualbox/UnattendedTemplates/debian_preseed.cfg
-POST_INSTALL_TEMPLATE=/usr/lib/virtualbox/UnattendedTemplates/debian_postinstall.sh
-MEMOIRE_ALLOUEE_VM=8192
-VRAM_ALLOUEE_VM=256
-ESPACE_DISQUE_ALLOUEE_VM=30000
-NB_CPU_VM=2
-OS_USER=dasim
-OS_PASSWORD=${OS_USER}
-OS_LOCALE=fr_FR
-OS_PAYS=FR
-OS_KEYBOARD=fr
-OS_TIMEZONE=Europe/Paris
+. ./config/environment_variables_for_ubuntu_on_virtualbox.sh
 
 # Creation de la VM
 VBoxManage createvm --name ${NOM_VIRTUAL_MACHINE} --ostype Ubuntu_64 --register
@@ -53,7 +30,8 @@ VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --usbehci off
 VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --usbxhci off
 
 # Configuration du controller graphique
-VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --graphicscontroller vmsvga
+VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --graphicscontroller vboxsvga
+VBoxManage setextradata ${NOM_VIRTUAL_MACHINE} GUI/ScaleFactor 1.5
 
 # Configure le lecteur CD (si besoin pour booter dessus)
 VBoxManage storagectl ${NOM_VIRTUAL_MACHINE} --name IDE --add ide
@@ -78,9 +56,10 @@ VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --clipboard bidirectional
 VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --draganddrop bidirectional
 
 # Installation de l'OS sur la VM (Virtual Machine Unattended)
-VBoxManage unattended install ${NOM_VIRTUAL_MACHINE} --user=${OS_USER} --password=${OS_PASSWORD} --locale=${OS_LOCALE} --country=${OS_PAYS} --time-zone=${OS_TIMEZONE} --iso=${CHEMIN_FICHIER_ISO} --script-template ${SCRIPT_TEMPLATE} --post-install-template ${POST_INSTALL_TEMPLATE} --start-vm=gui
+VBoxManage unattended install ${NOM_VIRTUAL_MACHINE} --user=${OS_USER} --password=${OS_PASSWORD} --locale=${OS_LOCALE} --language=${OS_LANGUAGE} --country=${OS_PAYS} --time-zone=${OS_TIMEZONE} --iso=${CHEMIN_FICHIER_ISO} --script-template ${SCRIPT_TEMPLATE} --post-install-template ${POST_INSTALL_TEMPLATE} --start-vm=gui
 
-echo -e '\E[32m Installation VM Ubuntu de test dans VirtualBox en cours... Vous pouvez suivre son évolution dans la popup virtualbox qui est ouverte. \E[0m'
+echo -e '\E[32m Installation VM Ubuntu de test dans VirtualBox en cours... \E[0m'
+echo -e '\E[32m Vous pouvez suivre son évolution dans la popup virtualbox qui est ouverte. \E[0m'
 
 # Suppression de la VM
-# VBoxManage unregistervm --delete ${NOM_VIRTUAL_MACHINE}
+# VBoxManage unregistervm --delete "test-vm-ubuntu-18-04"
