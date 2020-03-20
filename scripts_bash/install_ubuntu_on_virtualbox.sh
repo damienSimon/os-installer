@@ -3,12 +3,11 @@
 # Installation VM Ubuntu 18.04.4 LTS de test dans VirtualBox
 echo -e '\E[32m Configuration de la VM Ubuntu de test dans VirtualBox en cours... \E[0m'
 
-#créer repertoire iso et telecharger image iso ubuntu desktop (checker si fichier présent sinon pas dupliquer les 2Go...)
-#creer repertoire VMs... (idem verifier si deja présent, si c est le cas demandez confirmation de suppression)
-
-#A corriger dans install auto ubuntu dans virtual box
+# Configuration restante à faire
 #- enlever la popup "aidez nous à améliorer ubuntu après reboot" (/usr/lib/gnome-initial-setup/gnome-initial-setup --exisiting-user ?)
 #- user login session obligatoire (voir pour le virer dans le cas de mes tests) => start-vm=headless suffit ? (possible de reboot la VM et demarrer en GUI après ?)
+#- créer repertoire iso et telecharger image iso ubuntu desktop (checker si fichier présent sinon pas dupliquer les 2Go...)
+#- creer repertoire VMs... (idem verifier si deja présent, si c est le cas demandez confirmation de suppression)
 #- modifier le script post_install pour aller lancer mes scripts sh outils?
 
 # Definition des variables pour la VM et l'OS
