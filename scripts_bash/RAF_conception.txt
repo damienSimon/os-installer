@@ -1,0 +1,22 @@
+Volonté de :
+1) aucune action manuelle (à l'exception en bout de chaine par le dev)
+2) testable automatiquement dans une VM en chaine complete (=> en faire un domaine à lui seul car très complexe? ou alors juste une couche infra assez fat?)
+3) utilisé les outils / images maintenus par la communauté linux (ne pas réinventer la roue / faire une surcouche pour config si besoin) => KISS
+4) shell os-installer (ou api) accessible sur une machine Ubuntu vierge (sans paquets d'installés)
+5) penser à un déploiement simple (pas de serveur web, no bdd?, etc...)
+6) sécuriser les transmissions de données sensibles (password, etc...)
+
+
+
+Détail de la partie 2 :
+- vérifier la copie en preseed du cdrom vers target
+- possible d'ajouter un fichier postinstall.sh perso en modifiant le debian_postinstall.sh ?
+Si pas possible alors essayer :
+- ajouter un répertoire et ses fichiers dans l'image ISO Ubuntu ou créer une nouvelle image ISO Ubuntu en ligne de commande à partir de l'image officielle
+Ou obligé de faire les 2 pour ne pas avoir de serveur web de stockage des scripts générés? (pour point 5)
+
+
+Détail de la partie 3 :
+- revoir les scripts preseed et postinstall override de manière à inclure les fichiers d'origine et juste avoir la différence dans le fichier override (plus lisible / maintenable)
+
+
