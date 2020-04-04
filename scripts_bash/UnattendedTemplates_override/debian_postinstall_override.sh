@@ -190,11 +190,17 @@ fi
 #
 # Packages needed for GAs.
 #
-echo "--------------------------------------------------" >> "${MY_LOGFILE}"
-echo '** Installing scripts perso...' | tee -a "${MY_LOGFILE}"
-log_command_in_target sudo wget -P /tmp/ http://192.168.0.26/01_install_docker.sh
-log_command_in_target sudo touch dasim01.sh
-log_command_in_target sudo /bin/bash /tmp/01_install_docker.sh
+#echo "--------------------------------------------------" >> "${MY_LOGFILE}"
+#echo '** Installing scripts perso...' | tee -a "${MY_LOGFILE}"
+#log_command_in_target sudo touch dasim01.sh
+#log_command_in_target sudo wget -P /install/ http://192.168.0.26/00_configure_repo_ubuntu.sh
+#log_command_in_target sudo wget -P /install/ http://192.168.0.26/01_install_docker.sh
+#log_command_in_target sudo -E apt-get update
+#log_command_in_target ping google.fr
+#log_command_in_target ping google.fr -c4
+#log_command_in_target ping6 www.google.com
+#log_command_in_target sudo /bin/bash /install/00_configure_repo_ubuntu.sh
+#log_command_in_target sudo /bin/bash /install/01_install_docker.sh
 echo "--------------------------------------------------" >> "${MY_LOGFILE}"
 echo '** Installing packages for building kernel modules...' | tee -a "${MY_LOGFILE}"
 log_command_in_target apt-get -y install build-essential
@@ -307,6 +313,36 @@ if [ -n "${MY_HAVE_CHROOT_SETUP}" ]; then
     fi
 fi
 
+echo "--------------------------------------------------" >> "${MY_LOGFILE}"
+echo '** Installing scripts perso...' | tee -a "${MY_LOGFILE}"
+log_command_in_target sudo touch dasim01.sh
+log_command_in_target sudo wget -P /install/ http://192.168.0.26/00_configure_repo_ubuntu.sh
+log_command_in_target sudo wget -P /install/ http://192.168.0.26/01_install_docker.sh
+#log_command_in_target sudo wget -P /etc/network/ http://192.168.0.26/interfaces
+#log_command_in_target sudo echo "nameserver 8.8.8.8" | sudo tee /etc/resolvconf/resolv.conf.d/base > /dev/null
+#log_command_in_target ifconfig
+#log_command_in_target "echo | cat /etc/network/interfaces"
+#log_command_in_target "sudo rm -f /etc/network/interfaces"
+#log_command_in_target sudo touch /etc/network/interfaces
+#log_command_in_target "sudo cat > /etc/network/interfaces << EOF
+#auto lo
+#iface lo inet loopback
+#EOF"
+#log_command_in_target "echo | cat /etc/network/interfaces"
+#log_command_in_target sudo service network-manager restart
+#log_command_in_target "echo | cat /etc/network/interfaces"
+#log_command_in_target sudo ip a
+#log_command_in_target sudo ip link ls
+#log_command_in_target sudo ip link ls up
+#log_command_in_target sudo -E apt-get update
+#log_command_in_target sudo /etc/init.d/networking restart
+#log_command_in_target ping fr.archive.ubuntu.com
+#log_command_in_target ping -w 6 8.8.8.8
+#log_command_in_target ping6 www.google.com
+#log_command_in_target sudo systemctl --type=status
+#log_command_in_target sudo systemctl stop netctl-auto@enp0s3.service
+log_command_in_target sudo /bin/bash /install/00_configure_repo_ubuntu.sh
+log_command_in_target sudo /bin/bash /install/01_install_docker.sh
 
 #
 # Log footer.

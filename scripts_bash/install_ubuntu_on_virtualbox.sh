@@ -29,7 +29,7 @@ VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --usbxhci off
 
 # Configuration du controller graphique
 VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --graphicscontroller vboxsvga
-VBoxManage setextradata ${NOM_VIRTUAL_MACHINE} GUI/ScaleFactor 1.5
+VBoxManage setextradata ${NOM_VIRTUAL_MACHINE} GUI/ScaleFactor 1.6
 
 # Configure le lecteur CD (si besoin pour booter dessus)
 VBoxManage storagectl ${NOM_VIRTUAL_MACHINE} --name IDE --add ide
@@ -42,6 +42,8 @@ VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --cpus ${NB_CPU_VM}
 # Configure le reseau
 VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --ioapic on
 VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --nic1 nat --nictype1 Am79C973
+#VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --nic2 bridged --nictype2 Am79C973 --nicpromisc2 allow-all --cableconnected2 on #--bridgeadapter2 enp0s3
+
 
 # Configure l'ordre pour le boot
 VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --boot1 dvd --boot2 disk --boot3 none --boot4 none
