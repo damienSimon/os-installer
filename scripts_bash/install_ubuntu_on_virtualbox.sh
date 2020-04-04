@@ -5,7 +5,6 @@ echo -e '\E[32m Configuration de la VM Ubuntu de test dans VirtualBox en cours..
 
 # Configuration restante à faire
 #- enlever la popup "aidez nous à améliorer ubuntu après reboot" (/usr/lib/gnome-initial-setup/gnome-initial-setup --exisiting-user ?)
-#- user login session obligatoire (voir pour le virer dans le cas de mes tests) => start-vm=headless suffit ? (possible de reboot la VM et demarrer en GUI après ?)
 #- créer repertoire iso et telecharger image iso ubuntu desktop (checker si fichier présent sinon pas dupliquer les 2Go...)
 #- creer repertoire VMs... (idem verifier si deja présent, si c est le cas demandez confirmation de suppression)
 #- modifier le script post_install pour aller lancer mes scripts sh outils?
@@ -62,3 +61,8 @@ echo -e '\E[32m Vous pouvez suivre son évolution dans la popup virtualbox qui e
 
 # Suppression de la VM
 # VBoxManage unregistervm --delete "test-vm-ubuntu-18-04"
+
+#VBoxManage --nologo guestcontrol ${NOM_VIRTUAL_MACHINE} run --exe "/bin/ls" --username ${OS_USER} --password ${OS_PASSWORD} --wait-stdout
+#VBoxManage guestcontrol ${NOM_VIRTUAL_MACHINE} run --exe /bin/sh --username ${OS_USER} --password ${OS_PASSWORD} --wait-stdout --wait-stderr -- -c 'sudo apt-get install docker'
+#vboxmanage guestcontrol test-vm-ubuntu-18-04 --username dasim --password dasim run  -- /bin/bash -c "echo youpi"
+
