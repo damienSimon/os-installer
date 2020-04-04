@@ -30,7 +30,7 @@ LDAP_PASSWORD_TEMPORAIRE=${LDAP_PASSWORD_PERSO}
 cat > ~/.m2/settings.xml << EOF
 <?xml version="1.0" encoding="UTF-8"?>
  
-<!-- Ensemble des paramètres maven pour RCA -->
+<!-- Ensemble des paramètres maven -->
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
@@ -59,7 +59,7 @@ cat > ~/.m2/settings.xml << EOF
         <mirror>
             <id>nexus</id>
             <mirrorOf>*</mirrorOf>
-            <url>https://nexus.int.rcacloud.it/repository/maven-public/</url>
+            <url>https://repo_nexus/repository/maven-public/</url>
         </mirror>
     </mirrors>
  
@@ -105,7 +105,7 @@ cat > ~/.m2/settings.xml << EOF
 EOF
 
 # Ajout du registry à NPM
-npm config set registry https://nexus.int.rcacloud.it/repository/npm-all/
+npm config set registry https://repo_npm/repository/npm-all/
 
 # Génération de la clé d'authentification (remplacer [LOGIN] et [PWD] par ceux de votre session 
  LOGIN_PASSWORD_NPM_CONCATENE_PERSO="${LDAP_LOGIN_PERSO}:${LDAP_PASSWORD_PERSO}"
