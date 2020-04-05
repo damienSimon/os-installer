@@ -104,7 +104,10 @@ deb http://security.ubuntu.com/ubuntu bionic-security main restricted
 deb http://security.ubuntu.com/ubuntu bionic-security universe
 # deb-src http://security.ubuntu.com/ubuntu bionic-security universe
 deb http://security.ubuntu.com/ubuntu bionic-security multiverse
-deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+
+
+# TODO DASIM : Bien mettre linux/debian au lieu de linux/ubuntu sinon l'installation de docker ne marche pas
+deb [arch=amd64] https://download.docker.com/linux/debian bionic stable
 # deb-src [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
 # deb-src http://security.ubuntu.com/ubuntu bionic-security multiverse
 EOF
