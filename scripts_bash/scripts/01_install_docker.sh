@@ -4,7 +4,7 @@
 echo -e '\E[32m Installation de docker en cours... \E[0m'
 
 # Mise à jour
-sudo apt-get update
+sudo apt-get update -y
 
 # Suppression des anciennes versions de Docker
 sudo apt-get remove docker docker-engine docker.io containerd runc
@@ -16,13 +16,13 @@ sudo apt-get install -y \
     curl \
     gnupg-agent \
     software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -	
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
-sudo apt-get update
+sudo apt-get update -y
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
 # Check de la version installée
