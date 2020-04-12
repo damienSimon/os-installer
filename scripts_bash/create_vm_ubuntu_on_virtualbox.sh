@@ -39,7 +39,7 @@ VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --cpus ${NB_CPU_VM}
 
 # Configure le reseau
 VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --ioapic on
-VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --nic1 nat --nictype1 Am79C973 --nicpromisc1 allow-vms --cableconnected1 on
+VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --nic1 bridged --bridgeadapter1 enx0050b6a74df2 --nictype1 Am79C973 --nicpromisc1 allow-vms --cableconnected1 on
 
 # Configure l'ordre pour le boot
 VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --boot1 dvd --boot2 disk --boot3 none --boot4 none
