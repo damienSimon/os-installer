@@ -54,5 +54,25 @@ VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --draganddrop bidirectional
 # Installation de l'OS sur la VM (Virtual Machine Unattended)
 VBoxManage unattended install ${NOM_VIRTUAL_MACHINE} --user=${OS_USER} --password=${OS_PASSWORD} --locale=${OS_LOCALE} --language=${OS_LANGUAGE} --country=${OS_PAYS} --time-zone=${OS_TIMEZONE} --iso=${CHEMIN_FICHIER_ISO} --script-template ${SCRIPT_TEMPLATE} --post-install-template ${POST_INSTALL_TEMPLATE} --start-vm=gui
 
+# Communication sur l'attente de l'IP pour enchainer sur l'installation des outils via ssh
 echo -e '\E[32m Installation VM Ubuntu de test dans VirtualBox en cours... \E[0m'
-echo -e '\E[32m Vous pouvez suivre son évolution dans la popup virtualbox qui est ouverte. \E[0m'
+echo -e "\E[32m Vous pouvez suivre son évolution dans la popup virtualbox qui s'est ouverte. \E[0m"
+echo ""
+echo -e "\E[31m Ne fermer pas ce terminal ! \E[0m"
+echo ""
+echo -e "\E[32m En attente de la fin de l'installation de l'OS afin d'obtenir l'IP de la machine (~ 7 minutes). \E[0m"
+echo -e "\E[32m Les outils sélectionnés s'installeront automatiquement via ssh après avoir eu cette information. \E[0m"
+echo ""
+IP_VM="$(VBoxManage guestproperty get ${NOM_VIRTUAL_MACHINE} '/VirtualBox/GuestInfo/Net/0/V4/IP' | sed -e 's/Value: //g')"
+echo -e "\E[33m Installation de l'OS en cours... IP_VM => '$IP_VM' \E[0m"
+while [[ $IP_VM == "No value set!" ]]
+do
+  sleep 30
+  IP_VM="$(VBoxManage guestproperty get ${NOM_VIRTUAL_MACHINE} '/VirtualBox/GuestInfo/Net/0/V4/IP' | sed -e 's/Value: //g')"
+  echo -e "\E[33m Installation de l'OS en cours... IP_VM => '$IP_VM' \E[0m"
+done
+echo ""
+echo -e "\E[32m Installation de l'OS terminé. L'IP de la machine est $IP_VM \E[0m"
+echo -e "\E[32m Les outils sélectionnés sont en cours d'installation... \E[0m"
+
+# Peaufiner la suite, ssh + communication
