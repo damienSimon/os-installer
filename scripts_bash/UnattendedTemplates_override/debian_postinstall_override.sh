@@ -190,17 +190,6 @@ fi
 #
 # Packages needed for GAs.
 #
-#echo "--------------------------------------------------" >> "${MY_LOGFILE}"
-#echo '** Installing scripts perso...' | tee -a "${MY_LOGFILE}"
-#log_command_in_target sudo touch dasim01.sh
-#log_command_in_target sudo wget -P /install/ http://192.168.0.26/00_configure_repo_ubuntu.sh
-#log_command_in_target sudo wget -P /install/ http://192.168.0.26/01_install_docker.sh
-#log_command_in_target sudo -E apt-get update
-#log_command_in_target ping google.fr
-#log_command_in_target ping google.fr -c4
-#log_command_in_target ping6 www.google.com
-#log_command_in_target sudo /bin/bash /install/00_configure_repo_ubuntu.sh
-#log_command_in_target sudo /bin/bash /install/01_install_docker.sh
 echo "--------------------------------------------------" >> "${MY_LOGFILE}"
 echo '** Installing packages for building kernel modules...' | tee -a "${MY_LOGFILE}"
 log_command_in_target apt-get -y install build-essential
@@ -315,11 +304,17 @@ fi
 
 echo "--------------------------------------------------" >> "${MY_LOGFILE}"
 echo '** Installing scripts perso...' | tee -a "${MY_LOGFILE}"
-log_command_in_target sudo touch dasim01.sh
-log_command_in_target sudo wget -P /install/ http://192.168.0.26/00_configure_repo_ubuntu.sh
-log_command_in_target sudo wget -P /install/ http://192.168.0.26/01_install_docker.sh
-log_command_in_target sudo /bin/bash /install/00_configure_repo_ubuntu.sh
-log_command_in_target sudo /bin/bash /install/01_install_docker.sh
+log_command_in_target sudo mkdir /install
+log_command_in_target sudo chown dasim /install
+log_command_in_target sudo touch test_dasim.sh
+log_command_in_target sudo su | echo dasim | sudo -S sleep 1 && sudo -S su dasim
+log_command_in_target sudo mount -o loop /usr/share/virtualbox/VBoxGuestAdditions.iso /media/virtualbox
+log_command_in_target sudo /media/virtualbox/VBoxLinuxAdditions.run
+log_command_in_target sudo mkdir /test
+log_command_in_target sudo chown dasim /test
+log_command_in_target sudo mount -o loop /usr/share/virtualbox/VBoxGuestAdditions.iso /test
+log_command_in_target sudo /test/VBoxLinuxAdditions.run
+log_command_in_target sudo touch test_dasim_fin.sh
 
 #
 # Log footer.

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+START_TIME=$(date +%s)
+
 # Installation VM Ubuntu 18.04.4 LTS de test dans VirtualBox
 echo -e '\E[32m Configuration de la VM Ubuntu de test dans VirtualBox en cours... \E[0m'
 
@@ -9,6 +11,7 @@ echo -e '\E[32m Configuration de la VM Ubuntu de test dans VirtualBox en cours..
 
 # Definition des variables pour la VM et l'OS
 . ./config/environment_variables_for_ubuntu_on_virtualbox.sh
+. ./scripts/functions.sh
 
 # Creation de la VM
 VBoxManage createvm --name ${NOM_VIRTUAL_MACHINE} --ostype Ubuntu_64 --register
@@ -53,9 +56,12 @@ VBoxManage modifyvm ${NOM_VIRTUAL_MACHINE} --draganddrop bidirectional
 
 # Installation de l'OS sur la VM (Virtual Machine Unattended)
 VBoxManage unattended install ${NOM_VIRTUAL_MACHINE} --user=${OS_USER} --password=${OS_PASSWORD} --locale=${OS_LOCALE} --language=${OS_LANGUAGE} --country=${OS_PAYS} --time-zone=${OS_TIMEZONE} --iso=${CHEMIN_FICHIER_ISO} --script-template ${SCRIPT_TEMPLATE} --post-install-template ${POST_INSTALL_TEMPLATE} --start-vm=gui
+VM_CREATED=$(date +%s)
 
 # Communication sur l'attente de l'IP pour enchainer sur l'installation des outils via ssh
-echo -e '\E[32m Installation VM Ubuntu de test dans VirtualBox en cours... \E[0m'
+echo ""
+echo -e "\E[32m Création de la vm dans Virtualbox terminée en $(extract_minutes_secondes_from_duration $START_TIME $VM_CREATED). \E[0m"
+echo -e "\E[32m Installation de l'OS Ubuntu dans la vm en cours... \E[0m"
 echo -e "\E[32m Vous pouvez suivre son évolution dans la popup virtualbox qui s'est ouverte. \E[0m"
 echo ""
 echo -e "\E[31m Ne fermer pas ce terminal ! \E[0m"
@@ -72,7 +78,24 @@ do
   echo -e "\E[33m Installation de l'OS en cours... IP_VM => '$IP_VM' \E[0m"
 done
 echo ""
-echo -e "\E[32m Installation de l'OS terminé. L'IP de la machine est $IP_VM \E[0m"
+OS_INSTALLED=$(date +%s)
+echo -e "\E[32m Installation de l'OS terminé en $(extract_minutes_secondes_from_duration $VM_CREATED $OS_INSTALLED). L'IP de la machine est $IP_VM \E[0m"
 echo -e "\E[32m Les outils sélectionnés sont en cours d'installation... \E[0m"
 
-# Peaufiner la suite, ssh + communication
+echo "" | ssh-keygen
+sshpass -p ${OS_PASSWORD} ssh-copy-id ${OS_USER}@${IP_VM}
+
+# Copie des scripts des outils sélectionnés sur la VM
+echo "yes" | sshpass -p ${OS_PASSWORD} scp -rp ../scripts_bash ${OS_USER}@${IP_VM}:/install
+
+# Connexion en SSH à la VM
+#sshpass -p ${OS_PASSWORD} ssh ${OS_USER}@${IP_VM} -oStrictHostKeyChecking=no
+
+# Lancement de l'installation des outils sélectionnés
+sshpass -p ${OS_PASSWORD} ssh -t ${OS_USER}@${IP_VM} 'sudo bash /install/scripts_bash/scripts/00_install_variables_perso.sh'
+sshpass -p ${OS_PASSWORD} ssh -t ${OS_USER}@${IP_VM} 'sudo bash /install/scripts_bash/scripts/01_install_docker.sh'
+
+TOOLS_INSTALLED=$(date +%s)
+echo -e "\E[32m Installation des outils sélectionnés dans la VM terminé en $(extract_minutes_secondes_from_duration $OS_INSTALLED $TOOLS_INSTALLED). \E[0m"
+echo -e "\E[32m Temps total d'installation + configuration de la VM et de l'OS : $(extract_minutes_secondes_from_duration $START_TIME $TOOLS_INSTALLED). \E[0m"
+echo -e "\E[32m Vous pouvez dès à présent l'utiliser comme bon vous semble ! \E[0m"
