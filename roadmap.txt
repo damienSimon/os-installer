@@ -1,0 +1,30 @@
+
+- lister les packages nécessaires pour lancer / utiliser tous mes scripts auto (le faire dans une VM vierge)
+- finir d'automatiser le lancement de la vm ubuntu suivi de l'installation des outils. Fiabiliser ca (toujours en bash)
+- bien séparer les domaines (creation VM, install OS, config outils)
+- créer un nouveau script de creation de vm pour DSM synology
+- créer script bash install serveur ldap + configuration du ldap (pouvoir reinstaller le serveur ldap avec un fichier de configuration sauvegardé = restauration auto)
+- créer script bash install gitlab + config complete + lien avec ldap (restauration à partir d'une sauvegarde)
+- créer des scripts de test afin de vérifier que les installations sont ok de manière automatisé (ping, api?, etc...)
+- créer et configurer les sauvegardes automatiques des données du serveur LDAP + Gitlab
+- tester de remonter tout from scratch avec juste les scripts et les sauvegardes faites sur mon NAS (ou des serveurs distants?)
+- créer un programme qui permet de détruire les serveurs au bout de 30 minutes d'inactivité (VM ou serveur distant ovh) => doit tourné en permanence en dehors de mes NAS ? conception à faire
+
+Une fois, DSM + LDAP + Gitlab installé et restaurable de manière automatisé => transformer les scripts bash en programme java hexagonal
+Plusieurs domaines nécessaires :
+- give-me-a-server => gestionnaire permettant de créer, d'installer et configurer un serveur / pc from scratch à partir de quelques choix (utilise les projets give-me-an-infra, install-my-os, configure-my-os et kill-my-server)
+- os-installer/install-my-os => permet d'installer un os à partir d'une liste disponible (plateforme : Windows / Linux / Mac, type : ubuntu / debian / os x, version : 18.04 / 20.04 / etc.., boot : preseed / iso personnalisé / snapshot)
+- tools-installer/configure-my-os => permet de configurer les outils souhaités sur une machine (possibilité de template)
+- give-me-an-infra(structure) => permet de créer une VM via Virtualbox ou bien de créer un serveur sur AWS, Google, OVH, etc... (attention au couplage fort avec tools-installer? qui installe l'OS?)
+- kill-my-server => permet de détruire le serveur dès qu'il n'est plus utilisé pendant plus de 30 minutes (avoir liste des serveurs up, configurer cette destruction). Obligatoire sur tous les serveurs créés !!! (permettra de mieux gérer mon budget et limiter les risques financiers)
+- pra-pca/how-to-survive => permet de sauvegarder les données nécessaires à la restauration complète de la startup
+
+
+
+Utilisation de mes NAS :
+- sauvegarde snapshot, volume docker, données clés (dupliqué sur chacun des 2 NAS)
+- hebergement du serveur LDAP + Gitlab + mail ? + kill-my-server ? + jira ?
+
+
+Urbanisation :
+- faire des schémas de conception entre les applications / domaines pour avoir de la visibilité
