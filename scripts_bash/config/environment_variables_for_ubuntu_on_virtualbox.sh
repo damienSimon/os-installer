@@ -4,7 +4,8 @@
 
 NOM_VIRTUAL_MACHINE="test-vm-ubuntu-18-04"
 REPERTOIRE_VIRTUAL_BOX="/home/dasim/perso/outils/VirtualBox"
-CHEMIN_FICHIER_ISO="${REPERTOIRE_VIRTUAL_BOX}/iso/ubuntu-18.04.4-desktop-amd64.iso"
+#CHEMIN_FICHIER_ISO="${REPERTOIRE_VIRTUAL_BOX}/iso/ubuntu-18.04.4-desktop-amd64.iso"
+CHEMIN_FICHIER_ISO="${REPERTOIRE_VIRTUAL_BOX}/iso/test_dasim_iso_perso1.iso"
 CHEMIN_FICHIER_VDI="${REPERTOIRE_VIRTUAL_BOX}/VMs/${NOM_VIRTUAL_MACHINE}/${NOM_VIRTUAL_MACHINE}.vdi"
 CHEMIN_REPERTOIRE_SCRIPTS_BASH="/home/dasim/perso/developpement/os-installer/scripts_bash"
 SCRIPT_TEMPLATE="${CHEMIN_REPERTOIRE_SCRIPTS_BASH}/UnattendedTemplates_override/ubuntu_preseed_override.cfg"
