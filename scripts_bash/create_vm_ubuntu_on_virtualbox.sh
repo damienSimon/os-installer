@@ -82,18 +82,18 @@ OS_INSTALLED=$(date +%s)
 echo -e "\E[32m Installation de l'OS terminé en $(extract_minutes_secondes_from_duration $VM_CREATED $OS_INSTALLED). L'IP de la machine est $IP_VM \E[0m"
 echo -e "\E[32m Les outils sélectionnés sont en cours d'installation... \E[0m"
 
-echo "" | ssh-keygen
-sshpass -p ${OS_PASSWORD} ssh-copy-id ${OS_USER}@${IP_VM}
+#echo "" | ssh-keygen
+#sshpass -p ${OS_PASSWORD} ssh-copy-id ${OS_USER}@${IP_VM}
 
 # Copie des scripts des outils sélectionnés sur la VM
-echo "yes" | sshpass -p ${OS_PASSWORD} scp -rp ../scripts_bash ${OS_USER}@${IP_VM}:/install
+#sshpass -p ${OS_PASSWORD} scp -oStrictHostKeyChecking=no -rp ../scripts_bash ${OS_USER}@${IP_VM}:/install
 
 # Connexion en SSH à la VM
 #sshpass -p ${OS_PASSWORD} ssh ${OS_USER}@${IP_VM} -oStrictHostKeyChecking=no
 
 # Lancement de l'installation des outils sélectionnés
-sshpass -p ${OS_PASSWORD} ssh -t ${OS_USER}@${IP_VM} 'sudo bash /install/scripts_bash/scripts/00_install_variables_perso.sh'
-sshpass -p ${OS_PASSWORD} ssh -t ${OS_USER}@${IP_VM} 'sudo bash /install/scripts_bash/scripts/01_install_docker.sh'
+#sshpass -p ${OS_PASSWORD} ssh -t ${OS_USER}@${IP_VM} 'sudo bash /install/scripts_bash/scripts/00_install_variables_perso.sh'
+#sshpass -p ${OS_PASSWORD} ssh -t ${OS_USER}@${IP_VM} 'sudo bash /install/scripts_bash/scripts/01_install_docker.sh'
 
 TOOLS_INSTALLED=$(date +%s)
 echo -e "\E[32m Installation des outils sélectionnés dans la VM terminé en $(extract_minutes_secondes_from_duration $OS_INSTALLED $TOOLS_INSTALLED). \E[0m"
