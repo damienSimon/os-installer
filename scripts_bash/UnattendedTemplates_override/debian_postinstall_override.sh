@@ -304,65 +304,7 @@ fi
 
 echo "--------------------------------------------------" >> "${MY_LOGFILE}"
 echo '** Installing scripts perso...' | tee -a "${MY_LOGFILE}"
-log_command_in_target sudo mkdir /install
-log_command_in_target sudo chown dasim /install
-log_command_in_target sudo touch test_dasim.sh
-#log_command_in_target sudo su | echo dasim | sudo -S sleep 1 && sudo -S su dasim
-#log_command_in_target sudo mount -o loop /usr/share/virtualbox/VBoxGuestAdditions.iso /media | sudo su | echo dasim | sudo -S sleep 1 && sudo -S su dasim
-#log_command_in_target sudo /install/guest-additions/VBoxLinuxAdditions.run
-#log_command_in_target sudo mkdir /test
-#log_command_in_target sudo chown dasim /test
-#log_command_in_target sudo mount -o loop /usr/share/virtualbox/VBoxGuestAdditions.iso /home/dasim/test
-#log_command_in_target sudo /home/dasim/test/VBoxLinuxAdditions.run
-#log_command_in_target sudo touch test_dasim_fin.sh
-#log_command_in_target sudo bash /install/scripts_bash/scripts/01_install_docker.sh
-#log_command_in_target sudo bash /install/scripts_bash/test_guest_additions.sh
-log_command_in_target sudo bash /install/scripts_bash/vbox-ga.sh
-
-#echo "--------------------------------------------------" >> "${MY_LOGFILE}"
-#echo '** Installing VirtualBox Guest Additions...' | tee -a "${MY_LOGFILE}"
-#log_command_in_target /bin/bash "/install/guest-additions/VBoxLinuxAdditions.run" --nox11
-#log_command_in_target /bin/bash -c "udevadm constrol --reload-rules" # GAs doesn't yet do this.
-#log_command_in_target /bin/bash -c "udevadm trigger"                 # (ditto)
-#log_command_in_target usermod -a -G vboxsf "dasim"
-
-#log_command sudo cat >> /etc/fstab << EOF
-#/dev/guestadditions /install/guest-additions/ auto defaults 0 0
-#EOF
-#log_command sudo su -c "echo '/dev/guestadditions /install/guest-additions/ auto defaults 0 0' >> /etc/fstab"
-
-
-#log_command_in_target sudo /install/guest-additions/VBoxLinuxAdditions.run
-
-
-#log_command sudo bash echo "LOOP_DEVICE_LOSETUP-F=$(sudo losetup -f)"
-#log_command_in_target echo "DASIM=> MOUNT -o bind : ${MY_CDROM_NOCHROOT}----${MY_TARGET}${MY_CHROOT_CDROM}"
-
-#log_command sudo lsof
-
-
-
-##### A TESTER (possible que ca casse toute l'install)
-#log_command sudo umount /cdrom
-#log_command sudo umount /target
-#log_command sudo umount /target/
-#
-#log_command sudo mount -o loop -t iso9660 /usr/share/virtualbox/VBoxGuestAdditions.iso /media
-#log_command sudo mount -o loop /usr/share/virtualbox/VBoxGuestAdditions.iso /media
-
-
-
-
-#log_command LOOP_DEVICE="/dev/guestadditions" # this will print the first available loop device ex:/dev/loop0
-#log_command echo "LOOP_DEVICE_LOOP8=/dev/guestadditions"
-##losetup /dev/loop0 /usr/share/virtualbox/VBoxGuestAdditions.iso #associate loop0 with the specified file
-#log_command sudo losetup /usr/share/virtualbox/VBoxGuestAdditions.iso /media #associate loop0 with the specified file
-#log_command sudo losetup /usr/share/virtualbox/VBoxGuestAdditions.iso /dev/guestadditions #associate loop0 with the specified file
-##mount /dev/loop0 /media #It may be necessary specify the type (-t iso9660)
-#log_command sudo mount -t iso9660 /dev/guestadditions /media #It may be necessary specify the type (-t iso9660)
-#
-#log_command sudo /media/VBoxLinuxAdditions.run
-
+log_command_in_target sudo bash /install/guest-additions/VBoxLinuxAdditions.run
 
 #
 # Log footer.
